@@ -6,7 +6,8 @@ class TaskService {
             const tasks = await Task.find();
             return tasks;
         } catch (error) {
-            throw error;
+            console.error("Error fetching tasks:", error.message);
+            throw new Error("Error fetching tasks");
         }
     }
 
@@ -16,7 +17,8 @@ class TaskService {
             const newTask = await task.save();
             return newTask;
         } catch (error) {
-            throw error;
+            console.error("Error creating task:", error.message);
+            throw new Error("Error creating task");
         }
     }
 
@@ -27,18 +29,26 @@ class TaskService {
                 updatedTaskData,
                 { new: true }
             );
+            if (!updatedTask) {
+                throw new Error("Task not found");
+            }
             return updatedTask;
         } catch (error) {
-            throw error;
+            console.error("Error updating task:", error.message);
+            throw new Error("Error updating task");
         }
     }
 
     async deleteTask(taskId) {
         try {
             const deletedTask = await Task.findByIdAndDelete(taskId);
+            if (!deletedTask) {
+                throw new Error("Task not found");
+            }
             return deletedTask;
         } catch (error) {
-            throw error;
+            console.error("Error deleting task:", error.message);
+            throw new Error("Error deleting task");
         }
     }
 
@@ -49,9 +59,13 @@ class TaskService {
                 { status: "completed" },
                 { new: true }
             );
+            if (!updatedTask) {
+                throw new Error("Task not found");
+            }
             return updatedTask;
         } catch (error) {
-            throw error;
+            console.error("Error completing task:", error.message);
+            throw new Error("Error completing task");
         }
     }
 
@@ -62,9 +76,13 @@ class TaskService {
                 { status: "canceled" },
                 { new: true }
             );
+            if (!updatedTask) {
+                throw new Error("Task not found");
+            }
             return updatedTask;
         } catch (error) {
-            throw error;
+            console.error("Error canceling task:", error.message);
+            throw new Error("Error canceling task");
         }
     }
 }

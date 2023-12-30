@@ -6,7 +6,8 @@ class TaskController {
             const tasks = await taskService.getAllTasks();
             res.json(tasks);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            console.error("Error in getAllTasks:", error.message);
+            res.status(500).json({ error: "Internal Server Error" });
         }
     }
 
@@ -16,7 +17,8 @@ class TaskController {
             const newTask = await taskService.createTask(taskData);
             res.status(201).json(newTask);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            console.error("Error in createTask:", error.message);
+            res.status(400).json({ error: "Bad Request" });
         }
     }
 
@@ -30,7 +32,8 @@ class TaskController {
             );
             res.json(updatedTask);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            console.error("Error in updateTask:", error.message);
+            res.status(400).json({ error: "Bad Request" });
         }
     }
 
@@ -40,7 +43,8 @@ class TaskController {
             const deletedTask = await taskService.deleteTask(taskId);
             res.json(deletedTask);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            console.error("Error in deleteTask:", error.message);
+            res.status(500).json({ error: "Internal Server Error" });
         }
     }
 
@@ -50,7 +54,8 @@ class TaskController {
             const completedTask = await taskService.completeTask(taskId);
             res.json(completedTask);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            console.error("Error in completeTask:", error.message);
+            res.status(400).json({ error: "Bad Request" });
         }
     }
 
@@ -60,7 +65,8 @@ class TaskController {
             const canceledTask = await taskService.cancelTask(taskId);
             res.json(canceledTask);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            console.error("Error in cancelTask:", error.message);
+            res.status(400).json({ error: "Bad Request" });
         }
     }
 }
