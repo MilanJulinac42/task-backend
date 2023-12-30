@@ -53,6 +53,16 @@ class TaskController {
             res.status(400).json({ message: error.message });
         }
     }
+
+    async cancelTask(req, res) {
+        const taskId = req.params.id;
+        try {
+            const canceledTask = await taskService.cancelTask(taskId);
+            res.json(canceledTask);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = new TaskController();

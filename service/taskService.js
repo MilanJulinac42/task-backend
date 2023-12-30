@@ -54,6 +54,19 @@ class TaskService {
             throw error;
         }
     }
+
+    async cancelTask(taskId) {
+        try {
+            const updatedTask = await Task.findByIdAndUpdate(
+                taskId,
+                { status: "canceled" },
+                { new: true }
+            );
+            return updatedTask;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new TaskService();

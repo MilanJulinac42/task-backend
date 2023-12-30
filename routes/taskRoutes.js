@@ -8,5 +8,6 @@ router.post("/", taskController.createTask);
 router.patch("/:id", taskController.updateTask);
 router.delete("/:id", taskController.deleteTask);
 router.patch("/:id/complete", taskController.completeTask);
+router.patch("/:id/cancel", taskController.cancelTask);
 
 module.exports = router;
