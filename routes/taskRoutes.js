@@ -1,5 +1,5 @@
 const express = require("express");
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 const taskController = require("../contollers/taskController");
 const { validate } = require("../middleware/validationMiddleware");
 
