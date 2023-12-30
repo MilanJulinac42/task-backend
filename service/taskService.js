@@ -19,6 +19,41 @@ class TaskService {
             throw error;
         }
     }
+
+    async updateTask(taskId, updatedTaskData) {
+        try {
+            const updatedTask = await Task.findByIdAndUpdate(
+                taskId,
+                updatedTaskData,
+                { new: true }
+            );
+            return updatedTask;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async deleteTask(taskId) {
+        try {
+            const deletedTask = await Task.findByIdAndDelete(taskId);
+            return deletedTask;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async completeTask(taskId) {
+        try {
+            const updatedTask = await Task.findByIdAndUpdate(
+                taskId,
+                { status: "completed" },
+                { new: true }
+            );
+            return updatedTask;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new TaskService();

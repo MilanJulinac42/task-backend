@@ -19,6 +19,40 @@ class TaskController {
             res.status(400).json({ message: error.message });
         }
     }
+
+    async updateTask(req, res) {
+        const taskId = req.params.id;
+        const updatedTaskData = req.body;
+        try {
+            const updatedTask = await taskService.updateTask(
+                taskId,
+                updatedTaskData
+            );
+            res.json(updatedTask);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
+    async deleteTask(req, res) {
+        const taskId = req.params.id;
+        try {
+            const deletedTask = await taskService.deleteTask(taskId);
+            res.json(deletedTask);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async completeTask(req, res) {
+        const taskId = req.params.id;
+        try {
+            const completedTask = await taskService.completeTask(taskId);
+            res.json(completedTask);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = new TaskController();
