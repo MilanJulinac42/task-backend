@@ -5,10 +5,7 @@ const taskRoutes = require("./routes/taskRoutes");
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-mongoose.connect("mongodb://localhost:27017/tasktracker", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect("mongodb://localhost:27017/tasktracker", {});
 
 app.use(express.json());
 
